@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrazilianHedgeFoundsInfo.Api", "BrazilianHedgeFoundsInfo\BrazilianHedgeFoundsInfo.Api.csproj", "{2D16ADC8-DD08-4882-B833-2BCB70BD777F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrazilianHedgeFunds.ETL", "BrazilianHedgeFunds.ETL\BrazilianHedgeFunds.ETL.csproj", "{38631B2A-0CA3-4837-B169-6084CDEADF2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D16ADC8-DD08-4882-B833-2BCB70BD777F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D16ADC8-DD08-4882-B833-2BCB70BD777F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D16ADC8-DD08-4882-B833-2BCB70BD777F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D16ADC8-DD08-4882-B833-2BCB70BD777F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38631B2A-0CA3-4837-B169-6084CDEADF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38631B2A-0CA3-4837-B169-6084CDEADF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38631B2A-0CA3-4837-B169-6084CDEADF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38631B2A-0CA3-4837-B169-6084CDEADF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8B4ABFC-F4AE-4720-AEFA-F3423C8B749B}
+	EndGlobalSection
+EndGlobal

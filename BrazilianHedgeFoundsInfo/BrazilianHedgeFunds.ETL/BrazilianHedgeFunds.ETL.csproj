@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dotnet-BrazilianHedgeFunds.ETL-781A8FFB-DEFB-496D-931B-0AC1C5A6A94F</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.16">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\Repository\TempDatabase\" />
+  </ItemGroup>
+</Project>
