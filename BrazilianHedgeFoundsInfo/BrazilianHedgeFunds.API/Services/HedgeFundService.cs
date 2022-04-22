@@ -54,7 +54,7 @@ namespace BrazilianHedgeFunds.API.Services
 
                 _logger.LogInformation($"Processing {inDto.CNPJ} from {inDto.StartDate} to {inDto.EndDate}");
                 var funds = await _repository.GetFundsBy(inDto);
-                _logger.LogInformation($"It was found {funds.Count} to {inDto.CNPJ}");
+                _logger.LogInformation($"It was found {funds.Count} records on {inDto.CNPJ} from {inDto.StartDate} to {inDto.EndDate}");
 
                 if (funds.Count == 0)
                     return new HedgeFundOutDto { HedgeFundRecords = new List<HedgeFundRecord>(), IsInvalid = false };

@@ -1,10 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace BrazilianHedgeFunds.ETL.Business.Services
 {
     public interface ITransformHedgeFundsDataService
     {
-        Task TransformDataFromCsvToDB(CancellationToken stoppingToken);
+        Task TransformDataFromCsvToDB();
     }
 }

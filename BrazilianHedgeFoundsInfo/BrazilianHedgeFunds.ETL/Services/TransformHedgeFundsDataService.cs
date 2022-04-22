@@ -31,7 +31,7 @@ namespace BrazilianHedgeFunds.ETL.Services
             _configuration = configuration;
         }
 
-        public async Task TransformDataFromCsvToDB(CancellationToken stoppingToken)
+        public async Task TransformDataFromCsvToDB()
         {
             try
             {
@@ -43,7 +43,7 @@ namespace BrazilianHedgeFunds.ETL.Services
 
                 foreach (var fileName in filesNames)
                 {
-                    _logger.LogInformation($"Processing file {filesProcessed + 1}/{filesNames.Count + 1}...");
+                    _logger.LogInformation($"Processing file {filesProcessed + 1}/{filesNames.Count}...");
                     List<HedgeFundRecord> funds = await ExtractDataFromFile(fileName);
                     
                     _logger.LogInformation($"Saving {funds.Count} records from {fileName} on database...");
@@ -69,10 +69,10 @@ namespace BrazilianHedgeFunds.ETL.Services
         {
             try
             {
-                var limitSizeToInsert = 20_000;
-
                 if (funds.Count == 0) return;
 
+                var limitSizeToInsert = 20_000;
+                
                 if (funds.Count <= limitSizeToInsert)
                 {
                     await _repository.SaveFunds(funds);
@@ -97,7 +97,7 @@ namespace BrazilianHedgeFunds.ETL.Services
             }
             catch (Exception ex)
             {
-                var errorMessage = $"It wasn't possible save data on DB. Exception: {ex.Message}";
+                var errorMessage = $"It wasn't possible to save data on DB. Exception: {ex.Message}";
 
                 _logger.LogError(ex, errorMessage);
                 ProcessError.Errors.Add(errorMessage);

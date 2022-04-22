@@ -56,13 +56,17 @@ namespace BrazilianHedgeFunds.ETL.Services
                 await FetchHistData(urls, stoppingToken);
                 await ExtractFiles(urlsToGetHistData, stoppingToken);
 
-                _logger.LogInformation("Files ready to be transformed");
+                _logger.LogInformation("Files are ready to be transformed");
 
                 return true;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Errors when trying to prepare files to data transform.");
+                var errorMessage = $"Error while trying to prepare files. Error: {ex.Message}";
+                
+                _logger.LogError(ex, errorMessage);
+                ProcessError.Errors.Add(errorMessage);
+                
                 return false;
             }
         }
@@ -111,7 +115,7 @@ namespace BrazilianHedgeFunds.ETL.Services
 
         private List<string> BuildUrlsToGetHist()
         {
-            _logger.LogInformation("Building history urls to download.");
+            _logger.LogInformation("Building history urls to download files.");
 
             var histFileName = _configuration["Rest:DefaultHistFileName"];
             var histPathToGetData = _configuration["Rest:OnlineDataSourceHistPath"];
@@ -137,7 +141,7 @@ namespace BrazilianHedgeFunds.ETL.Services
 
         private List<string> BuildUrlsToGetFiles()
         {
-            _logger.LogInformation("Building urls' file to download.");
+            _logger.LogInformation("Building urls to download files.");
 
             var fileName = _configuration["Rest:DefaultFileName"];
             var firtsYearToGetFileData = DateTime.Now.Year - _yearsWithoutHist + 1;

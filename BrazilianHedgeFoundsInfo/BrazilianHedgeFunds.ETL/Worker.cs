@@ -35,7 +35,7 @@ namespace BrazilianHedgeFunds.ETL
             var wereDataPreparedToTransform = await _prepareFileservice.PrepareData(stoppingToken);
 
             if (wereDataPreparedToTransform)
-                await _transformDataservice.TransformDataFromCsvToDB(stoppingToken);
+                await _transformDataservice.TransformDataFromCsvToDB();
 
             _prepareFileservice.CleanTempFiles();
 
