@@ -46,6 +46,6 @@ namespace BrazilianHedgeFunds.ETL
                     services.AddHostedService<Worker>();
                 });
 
-        private static readonly string connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={Environment.CurrentDirectory}\\Infrastructure\\Repository\\TempDatabase\\HedgeFund.mdf;Integrated Security=True;Connect Timeout=30";
+        private static readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\HedgeFund.mdf;Integrated Security=True;Connect Timeout=30";
     }
 }

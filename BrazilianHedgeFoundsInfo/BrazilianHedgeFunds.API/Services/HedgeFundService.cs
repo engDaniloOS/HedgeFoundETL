@@ -20,10 +20,14 @@ namespace BrazilianHedgeFunds.API.Services
         private readonly IHedgeFundRecordRepository _repository;
         private readonly IConfiguration _configuration;
 
-        private const string INVALID_CNPJ = "Cnpj isn't valid |";
-        private const string INVALID_START_DATE = "Start date isn't valid |";
-        private const string INVALID_END_DATE = "End date isn't valid";
+        private const string INVALID_CNPJ = "|Cnpj isn't valid| ";
+        private const string INVALID_END_DATE = "|End date isn't valid| ";
+        private const string INVALID_PAGE_SIZE = "|Page size should be smaller then 100| ";
+        private const string INVALID_START_DATE = "|Start date isn't valid| ";
+
         private readonly int OldestYearToFetchData;
+        private readonly int MaxItensByPage;
+
         public HedgeFundService(ILogger<HedgeFundService> logger,
                                 IConfiguration configuration,
                                 IHedgeFundRecordRepository repository)
@@ -31,7 +35,9 @@ namespace BrazilianHedgeFunds.API.Services
             _logger = logger;
             _repository = repository;
             _configuration = configuration;
+
             OldestYearToFetchData = int.Parse(_configuration["Params:OldesYearToProcess"]);
+            MaxItensByPage = int.Parse(_configuration["Params:DefaulPageSize"]);
         }
 
         public async Task<HedgeFundOutDto> GetFundsBy(HedgeFundInDto inDto)
@@ -46,17 +52,19 @@ namespace BrazilianHedgeFunds.API.Services
                 if (inDto.EndDate == DateTime.MinValue)
                     inDto.EndDate = DateTime.Now;
 
+                _logger.LogInformation($"Processing {inDto.CNPJ} from {inDto.StartDate} to {inDto.EndDate}");
                 var funds = await _repository.GetFundsBy(inDto);
+                _logger.LogInformation($"It was found {funds.Count} to {inDto.CNPJ}");
 
                 if (funds.Count == 0)
                     return new HedgeFundOutDto { HedgeFundRecords = new List<HedgeFundRecord>(), IsInvalid = false };
 
-                var pageSize = (inDto.PageSize == 0) ?
-                    int.Parse(_configuration["Params:DefaulPageSize"]) : inDto.PageSize;
+                var pageSize = (inDto.PageSize == 0) ? MaxItensByPage : inDto.PageSize;
 
                 var pageIndex = (inDto.PageIndex == 0) ? 1 : inDto.PageIndex;
 
                 var pagedFunds = await funds.OrderBy(f => f.RecordDate).ToPagedListAsync(pageIndex, pageSize);
+
                 var fundsToReturn = await pagedFunds.OrderBy(f => f.RecordDate).ToListAsync();
 
                 return new HedgeFundOutDto
@@ -83,17 +91,21 @@ namespace BrazilianHedgeFunds.API.Services
 
             if (inDto?.StartDate != DateTime.MinValue)
             {
-                var isAnInvalidOldDate = inDto.StartDate.Year < OldestYearToFetchData;
+                var isAnInvalidOldDate = (inDto.StartDate.Year < OldestYearToFetchData || inDto.StartDate > DateTime.Now);
                 if (isAnInvalidOldDate)
                     builder.Append(INVALID_START_DATE);
             }
 
             if (inDto?.EndDate != DateTime.MinValue)
             {
-                var isAnInvalidNewDate = inDto.StartDate > DateTime.Now;
+                var isAnInvalidNewDate = (inDto.EndDate.Year < OldestYearToFetchData || inDto.EndDate > DateTime.Now);
                 if (isAnInvalidNewDate)
                     builder.Append(INVALID_END_DATE);
             }
+
+            var isAmountItensByPageHuge = inDto.PageSize > MaxItensByPage;
+            if (isAmountItensByPageHuge) 
+                builder.Append(INVALID_PAGE_SIZE);
 
             var errorMessage = builder.ToString();
 

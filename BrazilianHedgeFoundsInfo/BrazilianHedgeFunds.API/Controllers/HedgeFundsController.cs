@@ -24,7 +24,7 @@ namespace BrazilianHedgeFunds.API.Controllers
             if (outDto.HedgeFundRecords.Count == 0)
                 return NotFound();
 
-            return Ok(outDto.HedgeFundRecords);
+            return Ok(new { outDto.PageInfo, outDto.HedgeFundRecords });
         }
     }
 }
