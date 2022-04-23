@@ -42,10 +42,14 @@ namespace BrazilianHedgeFunds.ETL
                     services.AddSingleton<IFetchHedgeFundsFilesInfraService, FetchHedgeFundsFilesInfraService>();
                     services.AddSingleton<IHedgeFundsFileManagerInfraService, HedgeFundsFileManagerInfraService>();
                     services.AddSingleton<IHedgeFundRecordRepository, HedgeFundRecordRepository>();
-                    services.AddDbContextFactory<Context>(option => option.UseSqlServer(connectionString));
+                    services.AddDbContextFactory<Context>(option => option.UseSqlServer(GetConnectionString()));
                     services.AddHostedService<Worker>();
                 });
 
-        private static readonly string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\HedgeFund.mdf;Integrated Security=True;Connect Timeout=30";
+        private static string GetConnectionString()
+        {
+            string path = Environment.CurrentDirectory.Replace("\\BrazilianHedgeFunds.ETL", "");
+            return $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={path}\\TempDB\\HedgeFund.mdf;Integrated Security=True;Connect Timeout=30";
+        }
     }
 }
