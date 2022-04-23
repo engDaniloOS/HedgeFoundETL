@@ -15,17 +15,4 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Repository\TempDatabase\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Infrastructure\Repository\TempDatabase\HedgeFund.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Infrastructure\Repository\TempDatabase\HedgeFund_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
