@@ -49,6 +49,11 @@ namespace BrazilianHedgeFunds.API
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
 
-        private string GetConnectionString() => Configuration.GetConnectionString("Default");
+        private string GetConnectionString()
+        {
+            string path = Environment.CurrentDirectory.Replace("\\BrazilianHedgeFunds.API", "");
+
+            return Configuration.GetConnectionString("Default").Replace("?path?", path); ;
+        }
     }
 }
