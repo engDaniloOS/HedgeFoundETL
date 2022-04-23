@@ -19,8 +19,7 @@ Todavia, por padrão as aplicações estão apontando para um DB SQL em arquivo 
 # Endpoints
 Para facilitar a execução e testes, a API esta documentadas com Swagger.
 
-* Serviço de Autorização
-  * [GET] /api/HedgeFunds
+* [GET] /api/HedgeFunds
   ** Endpoint responsável por retornar todos registros diários para determinado fundo Hedge. 
   ** Como parâmetro obrigatório é necessário informar o CNPJ do fundo (ex: 00.000.000/0000-00). 
   ** Como parâmetros não obrigatórios também podemos informar as datas de início e fim que desejamos resgatar os registros, no formato "YYYY-MM-DD". Ainda como parâmetros opcionais, podemos informar a quantidade de itens por páginas que desejamos que a consulta retorne, assim como o número da página desejada.
