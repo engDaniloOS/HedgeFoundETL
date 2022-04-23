@@ -16,6 +16,9 @@ Sistemas para extração e disponibilização de registros diários de fundos He
 Antes de executar quaisquer aplicações do projeto, ajustar as configurações do ETL e API para apontarem para o DB desejado. Para alterar a connection string no projeto do ETL, ir até o Program.cs. Já na API, a string de conexão encontra-se no arquivo padrão: appsettings.json.
 Todavia, por padrão as aplicações estão apontando para um DB SQL em arquivo salvo no repositório.
 
+# Execução do ETL
+Por padrão o ETL irá extrair dados dos fundos hedge a partir do dia 01/01/2017. Caso exista a necessidade da extrair dados a partir de datas posteriores, é possível passar como parêmetro para a aplicação a nova data de início desejado no formato "YYYY MM".
+
 # Endpoints
 Para facilitar a execução e testes, a API esta documentadas com Swagger.
 
