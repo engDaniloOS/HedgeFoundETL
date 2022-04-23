@@ -13,7 +13,7 @@ Sistemas para extração e disponibilização de registros diários de fundos He
 - [ ] Revisão dos testes unitários da API
 
 # Bancos de dados
-Antes de executar quaisquer aplicações do projeto, ajustar as configurações do ETL e API para apontarem para o DB desejado.
+Antes de executar quaisquer aplicações do projeto, ajustar as configurações do ETL e API para apontarem para o DB desejado. Para alterar a connection string no projeto do ETL, ir até o Program.cs. Já na API, a string de conexão encontra-se no arquivo padrão: appsettings.json.
 Todavia, por padrão as aplicações estão apontando para um DB SQL em arquivo salvo no repositório.
 
 # Endpoints
